@@ -7,11 +7,7 @@ class Main extends React.Component {
     constructor() {
         super()
         this.state = {
-            currentNote: {
-                id: null,
-                title: '',
-                body: ''
-            },
+            currentNote: this.blankNote(),
             notes: [
                 {
                     id: 1,
@@ -32,70 +28,26 @@ class Main extends React.Component {
         }
     }
 
-    // updateTitleItem(ev) {
-    //     const otherList = [...this.state.otherList]
-    //     let title = this.state.title
-    //     otherList.forEach(list => {
-    //         if (list.active === true) {
-    //             title = ev.target.value
-    //             list.title = ev.target.value
-    //         }
-    //     })
-    //     this.setState({
-    //         otherList, title
-    //     })
-    //     console.log(otherList)
-    // }
-
-    // updateNoteItem(ev) {
-    //     const otherList = [...this.state.otherList]
-    //     let note = this.state.note
-    //     otherList.forEach(list => {
-    //         if (list.active === true) {
-    //             note = ev.target.value
-    //             list.note = ev.target.value
-    //         }
-    //     })
-    //     this.setState({
-    //         otherList, note
-    //     })
-    //     console.log(otherList)
-    // }
-
-    // handleClick(item, ev) {
-
-    //     const otherList = [...this.state.otherList]
-    //     let title = this.state.title
-    //     let note = this.state.note
-
-    //     otherList.forEach(list => {
-    //         if (list === item) {
-    //             list.active = true
-    //             title = list.title
-    //             note = list.note
-    //         }
-    //         else {
-    //             list.active = false
-    //         }
-    //     })
-
-    //     console.log(title)
-    //     this.setState({
-    //         otherList: otherList,
-    //         title: title,
-    //         note: note
-    //     })
-
-    // }
+    blankNote = () => {
+        return {
+            id: null,
+            title: '',
+            body: ''
+        }
+    }
 
     setCurrentNote = (note) =>{
         this.setState({currentNote: note})
     }
 
+    resetCurrentNote = () => {
+        this.setCurrentNote(this.blankNote())
+    }
+
     render() {
         return (
             <div className="Main" style={style}>
-                <SideBar />
+                <SideBar resetCurrentNote={this.resetCurrentNote}/>
                 <NoteList notes={this.state.notes} setCurrentNote={this.setCurrentNote}/>
                 <NoteForm currentNote={this.state.currentNote}/>
             </div>
