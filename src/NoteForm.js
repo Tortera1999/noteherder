@@ -2,8 +2,7 @@ import React from 'react'
 
 import './NoteForm.css'
 
-class NoteForm extends React.Component{
-  render(props){
+const NoteForm = ({currentNote}) => {
     return (
         <div className="NoteForm">
           <div className="form-actions">
@@ -16,16 +15,15 @@ class NoteForm extends React.Component{
               <input
                 type="text"
                 name="title"
-                value={this.props.value}
-                onChange={this.props.onTitleClick}
+                value={currentNote.title}
+                //onChange={this.props.onTitleClick}
                 placeholder="Title your note"
               />
             </p>
-            <textarea name="body" value={this.props.value2} onChange={this.props.onNoteClick}/>
+            <textarea name="body" value={currentNote.body}/>
           </form>
         </div>
     );
-  }
 }
 
 
