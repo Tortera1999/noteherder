@@ -65,7 +65,7 @@ class Main extends React.Component {
     render() {
         return (
             <div className="Main" style={style}>
-                <SideBar resetCurrentNote={this.resetCurrentNote}/>
+                <SideBar resetCurrentNote={this.resetCurrentNote} signOut={this.props.signOut}/>
                 <NoteList notes={this.state.notes} setCurrentNote={this.setCurrentNote}/>
                 <NoteForm currentNote={this.state.currentNote} saveNote={this.saveNote} removeCurrentNote={this.removeCurrentNote}/>
             </div>
