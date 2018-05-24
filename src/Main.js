@@ -1,7 +1,10 @@
 import React from 'react'
+
+import base from './base'
 import SideBar from './Sidebar';
 import NoteList from './NoteList';
 import NoteForm from './NoteForm';
+
 
 class Main extends React.Component {
     constructor() {
@@ -12,11 +15,12 @@ class Main extends React.Component {
         }
     }
 
-    componentDidMount(){
-        const notes = JSON.parse(window.localStorage.getItem('notes'))
-        if(notes){
-            this.setState({notes})
-        }
+    componentWillMount(){
+        base.syncState('notes', {
+            context: this,
+            state: 'notes',
+            asArray: true,
+        })
     }
 
     blankNote = () => {
@@ -46,8 +50,6 @@ class Main extends React.Component {
         }
         this.setState({notes})
         this.setCurrentNote(note)
-
-        window.localStorage.setItem('notes', JSON.stringify(notes))
     }
 
     removeCurrentNote = () => {
@@ -58,7 +60,6 @@ class Main extends React.Component {
             this.setState({notes})
         }
         this.resetCurrentNote()
-        window.localStorage.setItem('notes', JSON.stringify(notes))
     }
 
     render() {
