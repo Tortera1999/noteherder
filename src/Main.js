@@ -41,15 +41,14 @@ class Main extends React.Component {
         this.setCurrentNote(note)
     }
 
-    deleteNote = (note) => {
+    removeCurrentNote = () => {
         const notes = [...this.state.notes]
-        const i = notes.findIndex((currentNote) => currentNote.id === note.id)
-        if(i !== -1){
+        const i = notes.findIndex((note) => note.id === this.state.currentNote.id)
+        if(i > -1){
             notes.splice(i,1)
+            this.setState({notes})
         }
-        this.setState({notes})
-        this.setCurrentNote(this.blankNote())
-        //console.log(this.state.notes)
+        this.resetCurrentNote()
     }
 
     componentWillMount(){
@@ -83,7 +82,7 @@ class Main extends React.Component {
             <div className="Main" style={style}>
                 <SideBar resetCurrentNote={this.resetCurrentNote}/>
                 <NoteList notes={this.state.notes} setCurrentNote={this.setCurrentNote}/>
-                <NoteForm currentNote={this.state.currentNote} saveNote={this.saveNote} deleteNote={this.deleteNote}/>
+                <NoteForm currentNote={this.state.currentNote} saveNote={this.saveNote} removeCurrentNote={this.removeCurrentNote}/>
             </div>
         );
     }
