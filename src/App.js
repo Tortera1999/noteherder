@@ -12,7 +12,9 @@ class App extends Component {
 
   componentDidMount(){
     const uid = localStorage.getItem('uid')
-    this.setState({uid})
+    if(uid){
+      this.setState({uid})
+    }
     auth.onAuthStateChanged(user => {
       if(user){
         this.handleAuth(user)
@@ -23,8 +25,8 @@ class App extends Component {
   }
 
   handleAuth = (user) => {
-    localStorage.setItem('uid', user.uid)
     this.setState({uid: user.uid})
+    localStorage.setItem('uid', user.uid)
   }
 
   signedIn = () => {
@@ -32,10 +34,10 @@ class App extends Component {
   }
 
   signOut = () => {
-    localStorage.setItem('uid', null)
     this.setState({
       uid: null
     })
+    localStorage.removeItem('uid')
     auth.signOut()
   }
   render() {
