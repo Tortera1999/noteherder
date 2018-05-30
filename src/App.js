@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
 
-import './App.css';
-import {auth} from './base'
+import './App.css'
+import { auth } from './base'
 import Main from './Main'
 import SignIn from './SignIn'
 
@@ -10,22 +11,22 @@ class App extends Component {
     uid: null,
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const uid = localStorage.getItem('uid')
-    if(uid){
-      this.setState({uid})
+    if (uid) {
+      this.setState({ uid })
     }
     auth.onAuthStateChanged(user => {
-      if(user){
+      if (user) {
         this.handleAuth(user)
-      } else{
+      } else {
         this.signOut()
       }
     })
   }
 
   handleAuth = (user) => {
-    this.setState({uid: user.uid})
+    this.setState({ uid: user.uid })
     localStorage.setItem('uid', user.uid)
   }
 
@@ -34,22 +35,21 @@ class App extends Component {
   }
 
   signOut = () => {
-    this.setState({
-      uid: null
-    })
+    this.setState({ uid: null })
     localStorage.removeItem('uid')
     auth.signOut()
   }
+
   render() {
     return (
       <div className="App">
-      {
-        this.signedIn() ? <Main signOut={this.signOut} uid={this.state.uid}/> : <SignIn handleAuth={this.handleAuth}/>
-      }
+        <Switch>
+          <Route path="/sign-in" component={SignIn} />
+          <Route path="/notes" render={() => <Main signOut={this.signOut} uid={this.state.uid} /> } />
+        </Switch>
       </div>
-    );
+    )
   }
 }
 
-
-export default App;
+export default App
