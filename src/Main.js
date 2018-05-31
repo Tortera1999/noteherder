@@ -27,12 +27,15 @@ class Main extends React.Component {
       id: null,
       title: '',
       body: '',
+      updatedAt: null
     }
   }
 
   saveNote = (note) => {
     let shouldRedirect = false
     const notes = [...this.state.notes]
+    note.updatedAt = Date.now()
+    console.log(this.state.notes)
 
     if (!note.id) {
       // new note
