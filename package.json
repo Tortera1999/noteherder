@@ -1,10 +1,11 @@
 {
   "name": "notebird",
   "version": "0.1.0",
-  "homepage": "https://Tortera1999.github.io/noteherder/",
+  "homepage": "https://noteherder-e11b1.firebaseapp.com",
   "private": true,
   "dependencies": {
     "aphrodite": "^2.2.1",
+    "firebase": "^5.0.4",
     "firebase-tools": "^3.18.5",
     "gh-pages": "^1.1.0",
     "global": "^4.3.2",
