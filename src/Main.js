@@ -27,15 +27,14 @@ class Main extends React.Component {
       id: null,
       title: '',
       body: '',
-      updatedAt: null
+      updatedAt: '',
     }
   }
 
   saveNote = (note) => {
     let shouldRedirect = false
-    const notes = [...this.state.notes]
+    let notes = [...this.state.notes]
     note.updatedAt = Date.now()
-    console.log(this.state.notes)
 
     if (!note.id) {
       // new note
@@ -47,6 +46,8 @@ class Main extends React.Component {
       const i = notes.findIndex(currentNote => currentNote.id === note.id)
       notes[i] = note
     }
+
+    notes = notes.sort(function(a,b){return b.updatedAt-a.updatedAt})
 
     this.setState({ notes })
 
